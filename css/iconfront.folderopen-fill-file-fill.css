@@ -1,0 +1,20 @@
+@font-face {
+  font-family: "iconfont"; /* Project id  */
+  src: url('../ttf/iconfont.e7c2.e7c7.ttf') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-folderopen-fill:before {
+  content: "\e7c2";
+}
+
+.icon-file-fill:before {
+  content: "\e7c7";
+}
