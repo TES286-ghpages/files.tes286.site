@@ -68,7 +68,7 @@ jobs:
           git submodule foreach --recursive git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :
           git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
           git submodule foreach --recursive git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :
-          echo "::add-mask::$(echo ${{ github.token }} | base64)"
+          echo ::add-mask::$(echo x-access-token:${{ github.token }} | base64)
           git config --local http.https://github.com/.extraheader AUTHORIZATION: basic $(echo ${{ github.token }} | base64)
 
           # Deploy
