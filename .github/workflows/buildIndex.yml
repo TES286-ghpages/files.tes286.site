@@ -26,14 +26,7 @@ jobs:
         with:
           path: $GITHUB_WORKSPACE/index
           key: index
-          restore-key: index
-      
-      # Setup python runtime
-      - name: Setup python
-        uses: actions/setup-python@v3.1.2
-        with: 
-          python-version: 3.8
-          cache: pip
+          restore-keys: index
       
       - name: Install requests
         shell: bash
