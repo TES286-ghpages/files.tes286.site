@@ -54,7 +54,7 @@ jobs:
       - name: Build index
         shell: bash
         run: |
-          cd $GITHUB_WORKSPACE
+          cd $GITHUB_WORKSPACE/index
           python3 index.py
       
       - name: Install SSH key
@@ -63,3 +63,22 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           known_hosts: ${{ secrets.KNOWN_HOSTS }}
           if_key_exists: ignore # replace / ignore / fail; optional (defaults to fail)
+      
+      - name: Deploy index
+        shell: bash
+        run: |
+          cd $GITHUB_WORKSPACE/index
+          if [ -d $GITHUB_WORKSPACE/index/build ]; then
+            git clone --depth 1 --branch master git@github.com:TES286-ghpages/files-index.tes286.site.git $GITHUB_WORKSPACE/index/build
+          fi
+          cd $GITHUB_WORKSPACE/index/build
+          cp $GITHUB_WORKSPACE/index/index.json ./index.json
+          git add index.json
+          git commit -m "Update index"
+          git push origin master --force
+      
+      - name: Ckeck index
+        shell: bash
+        run: |
+          cd $GITHUB_WORKSPACE
+          curl -s https://raw.githubusercontent.com/TES286-ghpages/files-index.tes286.site/main/index.json | python3 -c "import json, sys, time; print('OK:', json.load(sys.stdin)['last_updated'] >= int(time.time()))"
