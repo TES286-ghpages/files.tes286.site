@@ -64,12 +64,8 @@ jobs:
             cd $GITHUB_WORKSPACE/index/build
           fi
           # Set auth
-          git config --local --name-only --get-regexp core\.sshCommand
-          git submodule foreach --recursive git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :
-          git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
-          git submodule foreach --recursive git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :
-          echo ::add-mask::$(echo x-access-token:${{ github.token }} | base64)
-          git config --local http.https://github.com/.extraheader AUTHORIZATION: basic $(echo ${{ github.token }} | base64)
+          curl https://raw.githubusercontent.com/TES286-ghpages/files.tes286.site/master/.other/setup_auth.py > setup_auth.py
+          python3 setup_auth.py
 
           # Deploy
           cd $GITHUB_WORKSPACE/index/build
