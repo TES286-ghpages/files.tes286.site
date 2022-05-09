@@ -62,6 +62,8 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE/index
           if [ -d $GITHUB_WORKSPACE/index/build ]; then
+            mkdir -p $GITHUB_WORKSPACE/index/builds
+          else
             git clone --depth 1 --branch master git@github.com:TES286-ghpages/files-index.tes286.site.git $GITHUB_WORKSPACE/index/build
           fi
           cd $GITHUB_WORKSPACE/index/build
