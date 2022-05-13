@@ -54,25 +54,8 @@ jobs:
         shell: bash
         run: |
           cd $GITHUB_WORKSPACE/index
-          if [ -d $GITHUB_WORKSPACE/index/build ]; then
-            cd $GITHUB_WORKSPACE/index/build
-            git fetch origin
-            git add --all
-            git reset --hard origin/main
-          else
-            git clone --depth 1 --branch main https://github.com/TES286-ghpages/files-index.tes286.site.git $GITHUB_WORKSPACE/index/build
-            cd $GITHUB_WORKSPACE/index/build
-          fi
-          # Set auth
-          curl https://raw.githubusercontent.com/TES286-ghpages/files.tes286.site/master/.other/setup_auth.py > setup_auth.py
-          python3 setup_auth.py
-
-          # Deploy
-          cd $GITHUB_WORKSPACE/index/build
-          cp $GITHUB_WORKSPACE/index/index.json ./index.json
-          git add index.json
-          git commit -m "Update index"
-          git push origin master --force
+          curl https://raw.githubusercontent.com/TES286-ghpages/files.tes286.site/master/.other/postIndex.py > postIndex.py
+          echo ${{ github.token }} | python3 postIndex.py $GITHUB_WORKSPACE/index/index.json
       
       - name: Ckeck index
         shell: bash
