@@ -4,7 +4,7 @@ import base64
 import pprint
 
 GITHUB_API_URL = 'https://api.github.com'
-GITHUB_TOKEN = sys.stdin.readline()
+GITHUB_TOKEN = sys.argv[-2]
 INDEX_PATH = sys.argv[-1]
 
 s = requests.Session()
