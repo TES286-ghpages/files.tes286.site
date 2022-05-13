@@ -29,3 +29,6 @@ def main():
         pprint.pprint(r.json())
     except:
         print(r.text)
+
+if __name__ == '__main__':
+    main()
