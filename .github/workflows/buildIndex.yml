@@ -55,7 +55,7 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE/index
           curl https://raw.githubusercontent.com/TES286-ghpages/files.tes286.site/master/.other/postIndex.py > postIndex.py
-          python3 postIndex.py ${{ github.token }} $GITHUB_WORKSPACE/index/index.json
+          python3 postIndex.py ${{ secrets.TOKEN }} $GITHUB_WORKSPACE/index/index.json
       
       - name: Ckeck index
         shell: bash
