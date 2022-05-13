@@ -36,7 +36,7 @@ def postIndex(indexPath, sha):
     return r
 
 def getSHA(path):
-    r = api('GET', '/repos/TES286-ghpages/files-index.tes286.site/contents/' + path)
+    r = api('GET', '/repos/TES286-ghpages/files-index.tes286.site/contents/index.json')
     try:
         r.raise_for_status()
     except requests.exceptions.HTTPError as e:
