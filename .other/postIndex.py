@@ -20,9 +20,9 @@ def api(method, url, **kwargs):
     url = GITHUB_API_URL + url
     return s.request(method, url, **kwargs)
 
-def postIndex(indexPath):
+def postIndex(indexPath, sha):
     with open(indexPath, 'rb') as f:
-        data = {'message': 'Upgrade Index', 'content': base64.b64encode(f.read()).decode('ascii')}
+        data = {'message': 'Upgrade Index', 'content': base64.b64encode(f.read()).decode('ascii'), 'sha': sha}
         r = api('PUT', '/repos/TES286-ghpages/files-index.tes286.site/contents/index.json', json=data)
     try:
         r.raise_for_status()
@@ -35,8 +35,21 @@ def postIndex(indexPath):
 
     return r
 
+def getSHA(path):
+    r = api('GET', '/repos/TES286-ghpages/files-index.tes286.site/contents/' + path)
+    try:
+        r.raise_for_status()
+    except requests.exceptions.HTTPError as e:
+        try:
+            pprint.pprint(r.json())
+        except:
+            print(r.text)
+        raise e
+    return r.json()['sha']
+
 def main():
-    r = postIndex(INDEX_PATH)
+    sha = getSHA(INDEX_PATH)
+    r = postIndex(INDEX_PATH, sha)
     try:
         pprint.pprint(r.json())
     except:
