@@ -35,8 +35,7 @@ jobs:
       - name: Download index builder
         shell: bash
         run: |
-          if [-d $GITHUB_WORKSPACE/index ]; then
-            mkdir -p $GITHUB_WORKSPACE/index
+          if [ -d $GITHUB_WORKSPACE/index ]; then
             cd $GITHUB_WORKSPACE/index
           else
             mkdir -p $GITHUB_WORKSPACE/index
@@ -61,4 +60,4 @@ jobs:
         shell: bash
         run: |
           cd $GITHUB_WORKSPACE
-          curl -s https://raw.githubusercontent.com/TES286-ghpages/files-index.tes286.site/main/index.json | python3 -c "import json, sys, time; print('OK:', json.load(sys.stdin)['last_updated'] >= int(time.time()))"
+          curl -s https://raw.githubusercontent.com/TES286-ghpages/files-index.tes286.site/main/index.json | python3 -c "import json, sys, time; print('OK:', json.load(sys.stdin)['last_updated'] >= time.time(), '\n', 'File: ', json.load(sys.stdin)['last_updated'], 'This: ', time.time())"

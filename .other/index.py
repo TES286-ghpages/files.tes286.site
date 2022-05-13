@@ -79,6 +79,7 @@ def build_index():
     for i in index:
         if i["type"] == "dir":
             i["size"] = sum(x["size"] for x in i["children"])
+    global TOTAL_SIZE
     TOTAL_SIZE = sum(x["size"] for x in index)
     index.sort(key=lambda x: x["name"])
     final_index = {
