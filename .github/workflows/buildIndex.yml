@@ -60,4 +60,4 @@ jobs:
         shell: bash
         run: |
           cd $GITHUB_WORKSPACE
-          curl -s https://raw.githubusercontent.com/TES286-ghpages/files-index.tes286.site/main/index.json | python3 -c "import json, sys, time; print('OK:', json.load(sys.stdin)['last_updated'] >= time.time(), '\n', 'File: ', json.load(sys.stdin)['last_updated'], 'This: ', time.time())"
+          curl -s https://raw.githubusercontent.com/TES286-ghpages/files-index.tes286.site/main/index.json | python3 -c "import json, sys, time; print('OK:', json.load(sys.stdin)['last_updated'] >= time.time()"
