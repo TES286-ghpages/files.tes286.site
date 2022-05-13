@@ -19,7 +19,7 @@ def api(method, url, **kwargs):
 def postIndex(indexPath):
     with open(indexPath, 'rb') as f:
         data = {'message': 'Upgrade Index', 'content': base64.b64encode(f.read()).decode('ascii')}
-        r = api('POST', '/repos/TES286-ghpages/files-index.tes286.site/contents/index.json', json=data)
+        r = api('PUT', '/repos/TES286-ghpages/files-index.tes286.site/contents/index.json', json=data)
     r.raise_for_status()
     return r
 
