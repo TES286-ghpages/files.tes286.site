@@ -7,7 +7,7 @@ GITHUB_API_URL = 'https://api.github.com'
 GITHUB_TOKEN = sys.argv[-2]
 GITHUB_TOKEN = GITHUB_TOKEN.encode('utf-8')
 GITHUB_TOKEN = b'x-access-token:'+GITHUB_TOKEN
-GITHUB_TOKEN = base64.b64decode(GITHUB_TOKEN)
+GITHUB_TOKEN = base64.b64encode(GITHUB_TOKEN)
 GITHUB_TOKEN = GITHUB_TOKEN.decode('utf-8')
 INDEX_PATH = sys.argv[-1]
 
